@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Cadastro</title>
+	<link rel='shortcut icon' th:href="@{/images/login.webp}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<script th:src="@{/jquery/jquery.min.js}"></script>
+	<script th:src="@{/jquery/jquery.maskedinput.min.js}"></script>
+	<script>
+		$(document).ready(function(){
+			$("#phone").mask("(99) 99999-9999");
+			//$("#CPF").mask("999.999.999-99");
+			
+			$("#cadastrar").click(function(){
+			    $("#tipo").val("1");
+			});
+		});
+	</script>
+</head>
+<body>
+	<header>
+		<form th:action="@{/}" method="get">
+			<button class="button" type="Submit">Fazer Login</button>
+		</form>
+	</header>
+	
+	<section>	
+		<form autocomplete="off" action="#" th:action="@{/registration}"
+			th:object="${user}" method="post" class="form-cadastro" role="form">
+			
+			<h2 class="titulo">Cadastro</h2>
+			
+			<span th:utext="${successMessage}"></span>
+			
+			<label th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}" class="validation-message"></label>
+			<input id="CPF" type="text" th:field="*{documento}" placeholder="CPF" class="form-control validate" /> 
+			
+			<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message"></label>
+			<input type="text" th:field="*{name}" placeholder="Nome" class="form-control" maxlength="150"/> 
+	
+			<label th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="validation-message"></label>
+			<input id="phone" type="text" th:field="*{telefone}" placeholder="Telefone" class="form-control" /> 
+			
+			<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
+			<input type="text" th:field="*{email}" placeholder="Email" class="form-control" maxlength="150"/> 
+			
+			<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
+			<input type="password" th:field="*{password}" placeholder="Password" class="form-control" maxlength="30"/> 
+	
+			<label th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}" class="validation-message"></label>
+			<input type="text" th:field="*{endereco}" placeholder="Endereço" class="form-control" maxlength="150"/> 
+			
+			<label th:if="${#fields.hasErrors('bairro')}" th:errors="*{bairro}" class="validation-message"></label>
+			<input type="text" th:field="*{bairro}" placeholder="Bairro" class="form-control" maxlength="100"/> 
+			
+			<label th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}" class="validation-message"></label>
+			<input type="text" th:field="*{cidade}" placeholder="Cidade" class="form-control" maxlength="50"/> 
+			
+			<label th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="validation-message"></label>
+			<input type="text" th:field="*{estado}" placeholder="Estado" class="form-control" maxlength="50"/> 
+			
+			<label th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" class="validation-message"></label>
+			<input type="hidden" th:field="*{tipo}" placeholder="Tipo" class="form-control" id="tipo" /> 
+			
+			<label th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}" class="validation-message"></label>
+			<input type="text" th:field="*{categoria}" placeholder="Empresa" class="form-control" maxlength="100"/>
+			
+<!-- 			<label th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}" class="validation-message">Ver Empresas</label> -->
+<!-- 			<select th:field="*{visivelEmpresa}" th:remove="all-but-first"> -->
+<!--                 <option th:each="visivelEmpresa : ${empresas}"  -->
+<!--                         th:value="${visivelEmpresa}" th:text="${visivelEmpresa.nome}">Credit card</option> -->
+<!--             </select> -->
+	
+			<button type="submit" class="button" id="cadastrar">Cadastrar</button>
+		</form>
+	</section>
+	<footer id="rodape">
+		<ul>
+			<li><a href="http://www.meutrabalho.com.br/registration">Cadastre-se</a></li>
+			<li><a href="http://www.meutrabalho.com.br/www/index.html">Entrar</a></li>
+			<li><a href="http://www.meutrabalho.com.br">WorkMe</a></li>
+			<li><a href="http://www.facebook.com">Facebook</a></li>
+			<li><a href="https://www.instagram.com/?hl=pt-br">Instagram</a></li>
+			<li><a href="https://www.getninjas.com.br">Sites em Comum</a></li>
+			<li><a href="http://www.meutrabalho.com.br">Sobre</a></li>
+			<li><a href="https://www.facebook.com/careers/?ref=pf">Carreiras</a></li>
+			<li><a href="http://www.meutrabalho.com.br">Termos</a></li>
+			<li><a href="https://www.facebook.com/help/?ref=pf">Ajuda</a></li>
+		</ul>
+	</footer>
+</body>
+</html>

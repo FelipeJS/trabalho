@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Meu Trabalho</title>
+	<link rel='shortcut icon' th:href="@{/images/login.webp}" /> 
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+</head>
+<body>
+	<header id="pagelet_bluebar" data-referrer="pagelet_bluebar">
+		<h1>
+			<a href="http://www.meutrabalho.com.br/" title="Ir para a página inicial do Meu Trabalho">
+				<img th:src="@{/images/login.webp}" class="img-responsive center-block" width="350" height="60" alt="Logo Meu Trabalho" />
+			</a>
+		</h1>
+	</header>
+	<section>
+		<form th:action="@{/login}" method="POST" class="form-signin">
+			<h3 class="form-signin-heading" th:text="Login"></h3>
+
+			<table role="presentation">			
+				<tbody>
+					<tr>
+						<td>
+							<label for="email">Email</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" id="email" name="email" class="form-control" tabindex="1"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="pass">Senha</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="password" id="password" name="password" class="form-control" tabindex="2"/>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">Email ou senha inválidos</p>
+			</div>
+			<button class="button" name="Submit" value="Entrar" type="Submit" th:text="Entrar"></button>
+		</form>
+		<form th:action="@{/registration}" method="get">
+			<button class="button" type="Submit">Cadastrar</button>
+		</form>	
+		<label class="sobre">Sobre o Sistema MeuTrabalho</label>
+		<p>O sistema MeuTrabalho foi desenvolvido para atender solicitações de clientes de forma ágil e prática. 
+		As solicitações são realizadas através do site ou em qualquer celular com sistema operacional Android ou IOS. 
+		O MeuTrabalho conta com um leque de empresas oferecendo diversos tipos de serviços para total satisfação dos clientes.</p>
+      	<p>Para se cadastrar as empresas devem entrar em contato através do nosso email <b>tecnologiagrave@gmail.com</b>, sendo necessárias informações básicas das mesmas.
+      Todas as pessoas fisícas podem realizar seu cadastro de forma gratuita através do botão <b>Cadastrar</b> com as informações necessárias para tal.
+       O sistema promove a interação entre ambas as partes, com foco no atendimento das solicitações dos clientes.</p>
+	</section>
+	<footer id="rodape">
+		<ul>
+			<li><a href="http://www.meutrabalho.com.br/registration">Cadastre-se</a></li>
+			<li><a href="http://www.meutrabalho.com.br/www/index.html">Entrar</a></li>
+			<li><a href="http://www.meutrabalho.com.br">WorkMe</a></li>
+			<li><a href="http://www.facebook.com">Facebook</a></li>
+			<li><a href="https://www.instagram.com/?hl=pt-br">Instagram</a></li>
+			<li><a href="https://www.getninjas.com.br">GetNinjas</a></li>
+			<li><a href="http://www.meutrabalho.com.br">Sobre</a></li>
+			<li><a href="https://www.facebook.com/careers/?ref=pf">Carreiras</a></li>
+			<li><a href="http://www.meutrabalho.com.br">Termos</a></li>
+			<li><a href="https://www.facebook.com/help/?ref=pf">Ajuda</a></li>
+		</ul>
+	</footer>
+</body>
+</html>
