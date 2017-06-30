@@ -4,11 +4,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/solicitacao")
 public class SolicitacaoController {
@@ -53,5 +55,10 @@ public class SolicitacaoController {
 	@RequestMapping(value = "/listarMinhasSolicitacoes", method = GET)
 	public Iterable<Solicitacao> listarMinhasSolicitacoes() {
 		return solicitacaoService.listarMinhasSolicitacoes();
+	}
+	
+	@RequestMapping(value = "/contarSolicitacao", method = GET)
+	public Long contarSolicitacao(@RequestParam int status) {
+		return solicitacaoService.contarSolicitacao(status);
 	}
 }

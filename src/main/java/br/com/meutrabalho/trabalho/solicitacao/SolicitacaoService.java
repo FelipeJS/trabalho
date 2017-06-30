@@ -148,4 +148,8 @@ public class SolicitacaoService {
 	public Iterable<Solicitacao> listarMinhasSolicitacoes() {
 		return solicitacaoRepository.findByUserOrderByCdSolicitacaoDesc(getUsuarioLogado());
 	}
+	
+	public Long contarSolicitacao(int status){
+		return solicitacaoRepository.countByStatus(status);
+	}
 }

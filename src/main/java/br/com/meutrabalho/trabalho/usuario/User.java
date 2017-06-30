@@ -73,6 +73,9 @@ public class User implements Serializable {
 
 	@NotEmpty(message = "*Preencha a categoria")
 	private String categoria;
+	
+	@NotEmpty(message = "*Preencha o setor")
+	private String setor;
 
 	public long getId() {
 		return id;
@@ -184,5 +187,13 @@ public class User implements Serializable {
 
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+
+	public String getSetor() {
+		return setor;
+	}
+
+	public void setSetor(String setor) {
+		this.setor = setor;
 	}
 }

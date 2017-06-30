@@ -12,9 +12,9 @@
 			$("#phone").mask("(99) 99999-9999");
 			//$("#CPF").mask("999.999.999-99");
 			
-			$("#cadastrar").click(function(){
-			    $("#tipo").val("1");
-			});
+// 			$("#cadastrar").click(function(){
+// 			    $("#tipo").val("1");
+// 			});
 		});
 	</script>
 </head>
@@ -61,10 +61,13 @@
 			<input type="text" th:field="*{estado}" placeholder="Estado" class="form-control" maxlength="50"/> 
 			
 			<label th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" class="validation-message"></label>
-			<input type="hidden" th:field="*{tipo}" placeholder="Tipo" class="form-control" id="tipo" /> 
+			<input type="text" th:field="*{tipo}" placeholder="Tipo" class="form-control" id="tipo" /> 
 			
 			<label th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}" class="validation-message"></label>
-			<input type="text" th:field="*{categoria}" placeholder="Empresa" class="form-control" maxlength="100"/>
+			<input type="text" th:field="*{categoria}" placeholder="Empresa" class="form-control" maxlength="100" style="text-transform:uppercase"/>
+			
+			<label th:if="${#fields.hasErrors('setor')}" th:errors="*{setor}" class="validation-message"></label>
+			<input type="text" th:field="*{setor}" placeholder="Setor" class="form-control" maxlength="100" style="text-transform:uppercase"/>
 			
 <!-- 			<label th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}" class="validation-message">Ver Empresas</label> -->
 <!-- 			<select th:field="*{visivelEmpresa}" th:remove="all-but-first"> -->

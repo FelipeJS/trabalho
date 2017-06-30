@@ -1,6 +1,7 @@
 package br.com.meutrabalho.trabalho.comentarioSolicitacao;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +35,9 @@ public class ComentarioSolicitacao implements Serializable {
 
 	private String descricao;
 
+	@Column(name = "dh_solicitacao")
+	private Date dhComentario;
+
 	public Long getCdComentarioSolicitacao() {
 		return cdComentarioSolicitacao;
 	}
@@ -64,5 +68,13 @@ public class ComentarioSolicitacao implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Date getDhComentario() {
+		return dhComentario;
+	}
+
+	public void setDhComentario(Date dhComentario) {
+		this.dhComentario = dhComentario;
 	}
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.meutrabalho.trabalho.usuario.User;
 import br.com.meutrabalho.trabalho.usuario.UserService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/trabalhaPara")
 public class TrabalhaParaController {
