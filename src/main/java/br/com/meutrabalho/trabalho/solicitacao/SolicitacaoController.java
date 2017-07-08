@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.meutrabalho.trabalho.usuario.UserLogado;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/solicitacao")
 public class SolicitacaoController {
 	@Autowired
-	SolicitacaoService solicitacaoService;
-
+	private SolicitacaoService solicitacaoService;
+	
+	@Autowired
+	private UserLogado userLogado;
+	
 	@RequestMapping(value = "/salvar", method = GET)
 	public Solicitacao salvar(@RequestParam String descricao, @RequestParam Long cdServico) {
 		return solicitacaoService.salvar(descricao, cdServico);
@@ -56,9 +61,9 @@ public class SolicitacaoController {
 	public Iterable<Solicitacao> listarMinhasSolicitacoes() {
 		return solicitacaoService.listarMinhasSolicitacoes();
 	}
-	
+
 	@RequestMapping(value = "/contarSolicitacao", method = GET)
 	public Long contarSolicitacao(@RequestParam int status) {
-		return solicitacaoService.contarSolicitacao(status);
+		return solicitacaoService.contarSolicitacao(userLogado.getUsuarioLogado().getId(), status);
 	}
 }

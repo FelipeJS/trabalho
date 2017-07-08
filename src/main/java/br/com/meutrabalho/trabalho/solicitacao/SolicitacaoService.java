@@ -5,16 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import br.com.meutrabalho.trabalho.servico.Servico;
 import br.com.meutrabalho.trabalho.servico.ServicoRepository;
 import br.com.meutrabalho.trabalho.trabalhaPara.TrabalhaPara;
 import br.com.meutrabalho.trabalho.trabalhaPara.TrabalhaParaRepository;
-import br.com.meutrabalho.trabalho.usuario.User;
-import br.com.meutrabalho.trabalho.usuario.UserService;
+import br.com.meutrabalho.trabalho.usuario.UserLogado;
 
 @Service("solicitacaoService")
 public class SolicitacaoService {
@@ -25,9 +22,6 @@ public class SolicitacaoService {
 	private static final int RECUSADO = 4;
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
 	private ServicoRepository servicoRepository;
 
 	@Autowired
@@ -36,17 +30,15 @@ public class SolicitacaoService {
 	@Autowired
 	private TrabalhaParaRepository trabalhaParaRepository;
 
-	public User getUsuarioLogado() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		return userService.findUserByEmail(auth.getName());
-	}
-
+	@Autowired
+	private UserLogado userLogado;
+	
 	public Solicitacao salvar(String descricao, Long cdServico) {
 		Solicitacao solicitacao = new Solicitacao();
 
 		solicitacao.setDescricao(descricao);
 		solicitacao.setServico(servicoRepository.findOneByCdServico(cdServico));
-		solicitacao.setUser(getUsuarioLogado());
+		solicitacao.setUser(userLogado.getUsuarioLogado());
 		solicitacao.setDhSolicitacao(new Date());
 		solicitacao.setStatus(ABERTO);
 
@@ -54,7 +46,7 @@ public class SolicitacaoService {
 	}
 
 	public Solicitacao aceitar(Solicitacao solicitacao) {
-		solicitacao.setUserAnalise(getUsuarioLogado());
+		solicitacao.setUserAnalise(userLogado.getUsuarioLogado());
 		solicitacao.setStatus(ANALISE);
 
 		return solicitacaoRepository.save(solicitacao);
@@ -67,7 +59,7 @@ public class SolicitacaoService {
 	}
 
 	public Solicitacao recusar(Solicitacao solicitacao) {
-		solicitacao.setUserAnalise(getUsuarioLogado());
+		solicitacao.setUserAnalise(userLogado.getUsuarioLogado());
 		solicitacao.setStatus(RECUSADO);
 
 		return solicitacaoRepository.save(solicitacao);
@@ -75,7 +67,7 @@ public class SolicitacaoService {
 
 	public Iterable<Solicitacao> listarAbertos() {
 		List<TrabalhaPara> empresasFuncionarios = (ArrayList<TrabalhaPara>) trabalhaParaRepository
-				.findByUserFuncionario(getUsuarioLogado());
+				.findByUserFuncionario(userLogado.getUsuarioLogado());
 
 		List<Solicitacao> solicitacoesParaFuncionario = new ArrayList<Solicitacao>();
 
@@ -86,20 +78,20 @@ public class SolicitacaoService {
 						.findByServicoInOrderByCdSolicitacaoDesc(servicosDaEmpresa);
 
 				for (Solicitacao solicitacao : solicitacoesDaEmpresa) {
-					if (solicitacao.getStatus() == 1)
+					if (solicitacao.getStatus() == ABERTO)
 						solicitacoesParaFuncionario.add(solicitacao);
 				}
 			}
 
 			return solicitacoesParaFuncionario;
 		} else {
-			return solicitacaoRepository.findByUserIdAberto(getUsuarioLogado().getId());
+			return solicitacaoRepository.findByUserIdAndStatus(userLogado.getUsuarioLogado().getId(), ABERTO);
 		}
 	}
 
 	public Iterable<Solicitacao> listarAnalisados() {
 		List<TrabalhaPara> empresasFuncionarios = (ArrayList<TrabalhaPara>) trabalhaParaRepository
-				.findByUserFuncionario(getUsuarioLogado());
+				.findByUserFuncionario(userLogado.getUsuarioLogado());
 
 		List<Solicitacao> solicitacoesParaFuncionario = new ArrayList<Solicitacao>();
 
@@ -110,20 +102,20 @@ public class SolicitacaoService {
 						.findByServicoInOrderByCdSolicitacaoDesc(servicosDaEmpresa);
 
 				for (Solicitacao solicitacao : solicitacoesDaEmpresa) {
-					if (solicitacao.getStatus() == 2)
+					if (solicitacao.getStatus() == ANALISE)
 						solicitacoesParaFuncionario.add(solicitacao);
 				}
 			}
 
 			return solicitacoesParaFuncionario;
 		} else {
-			return solicitacaoRepository.findByUserIdAnalise(getUsuarioLogado().getId());
+			return solicitacaoRepository.findByUserIdAndStatus(userLogado.getUsuarioLogado().getId(), ANALISE);
 		}
 	}
 
 	public Iterable<Solicitacao> listarFechados() {
 		List<TrabalhaPara> empresasFuncionarios = (ArrayList<TrabalhaPara>) trabalhaParaRepository
-				.findByUserFuncionario(getUsuarioLogado());
+				.findByUserFuncionario(userLogado.getUsuarioLogado());
 
 		List<Solicitacao> solicitacoesParaFuncionario = new ArrayList<Solicitacao>();
 
@@ -134,22 +126,22 @@ public class SolicitacaoService {
 						.findByServicoInOrderByCdSolicitacaoDesc(servicosDaEmpresa);
 
 				for (Solicitacao solicitacao : solicitacoesDaEmpresa) {
-					if (solicitacao.getStatus() == 3)
+					if (solicitacao.getStatus() == FECHADO)
 						solicitacoesParaFuncionario.add(solicitacao);
 				}
 			}
 
 			return solicitacoesParaFuncionario;
 		} else {
-			return solicitacaoRepository.findByUserIdFechado(getUsuarioLogado().getId());
+			return solicitacaoRepository.findByUserIdAndStatus(userLogado.getUsuarioLogado().getId(), FECHADO);
 		}
 	}
 
 	public Iterable<Solicitacao> listarMinhasSolicitacoes() {
-		return solicitacaoRepository.findByUserOrderByCdSolicitacaoDesc(getUsuarioLogado());
+		return solicitacaoRepository.findByUserOrderByCdSolicitacaoDesc(userLogado.getUsuarioLogado());
 	}
-	
-	public Long contarSolicitacao(int status){
-		return solicitacaoRepository.countByStatus(status);
+
+	public Long contarSolicitacao(Long userId, int status) {
+		return solicitacaoRepository.countByUserIdAndStatus(userId, status);
 	}
 }

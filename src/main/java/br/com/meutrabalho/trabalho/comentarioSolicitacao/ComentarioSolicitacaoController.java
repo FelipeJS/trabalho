@@ -5,8 +5,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.meutrabalho.trabalho.solicitacao.Solicitacao;
 import br.com.meutrabalho.trabalho.solicitacao.SolicitacaoRepository;
-import br.com.meutrabalho.trabalho.usuario.User;
-import br.com.meutrabalho.trabalho.usuario.UserService;
+import br.com.meutrabalho.trabalho.usuario.UserLogado;
 
 @CrossOrigin
 @RestController
@@ -29,7 +26,7 @@ public class ComentarioSolicitacaoController {
 	private ComentarioSolicitacaoRepository comentarioSolicitacaoRepository;
 
 	@Autowired
-	private UserService userService;
+	private UserLogado userLogado;
 
 	@RequestMapping(value = "/listar", method = GET)
 	public Iterable<ComentarioSolicitacao> listar(@RequestParam Long cdSolicitacao) {
@@ -46,10 +43,7 @@ public class ComentarioSolicitacaoController {
 		comentarioSolicitacao.setDescricao(descricao);
 		comentarioSolicitacao.setDhComentario(new Date());
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByEmail(auth.getName());
-
-		comentarioSolicitacao.setUser(user);
+		comentarioSolicitacao.setUser(userLogado.getUsuarioLogado());
 
 		return comentarioSolicitacaoRepository.save(comentarioSolicitacao);
 	}

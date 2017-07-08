@@ -15,20 +15,13 @@ public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long> 
 
 	Iterable<Solicitacao> findByServicoInOrderByCdSolicitacaoDesc(Iterable<Servico> servicos);
 
-	@Query(value = "SELECT S.* FROM servico V INNER JOIN solicitacao S ON S.CD_SERVICO = V.CD_SERVICO "
-			+ "INNER JOIN user U ON U.USER_ID = S.USER_ID "
-			+ "WHERE V.USER_ID = ?1 AND S.STATUS = 1 ORDER BY S.CD_SOLICITACAO DESC", nativeQuery = true)
-	Iterable<Solicitacao> findByUserIdAberto(Long userId);
-
 	@Query(value = "SELECT S.*, V.nome, U.* FROM servico V INNER JOIN solicitacao S ON S.CD_SERVICO = V.CD_SERVICO "
 			+ "INNER JOIN user U ON U.USER_ID = S.USER_ID "
-			+ "WHERE V.USER_ID = ?1 AND S.STATUS = 2 ORDER BY S.CD_SOLICITACAO DESC", nativeQuery = true)
-	Iterable<Solicitacao> findByUserIdAnalise(Long userId);
-
-	@Query(value = "SELECT S.*, V.nome, U.* FROM servico V INNER JOIN solicitacao S ON S.CD_SERVICO = V.CD_SERVICO "
-			+ "INNER JOIN user U ON U.USER_ID = S.USER_ID "
-			+ "WHERE V.USER_ID = ?1 AND S.STATUS = 3 ORDER BY S.CD_SOLICITACAO DESC", nativeQuery = true)
-	Iterable<Solicitacao> findByUserIdFechado(Long userId);
+			+ "WHERE V.USER_ID = ?1 AND S.STATUS = ?2 ORDER BY S.CD_SOLICITACAO DESC", nativeQuery = true)
+	Iterable<Solicitacao> findByUserIdAndStatus(Long userId, int status);
 	
-	Long countByStatus(int status);
+	@Query(value = "SELECT count(*) FROM servico V INNER JOIN solicitacao S ON S.CD_SERVICO = V.CD_SERVICO "
+			+ "INNER JOIN user U ON U.USER_ID = S.USER_ID "
+			+ "WHERE V.USER_ID = ?1 AND S.STATUS = ?2", nativeQuery = true)
+	Long countByUserIdAndStatus(Long userId, int status);
 }

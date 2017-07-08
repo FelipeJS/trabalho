@@ -6,8 +6,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,10 +23,12 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private UserLogado userLogado;
+	
 	@RequestMapping(value = "/consultarUsuarioLogado", method = GET)
-	public User getUsuarioLogado() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		return userService.findUserByEmail(auth.getName());
+	public User consultarUsuarioLogado() {
+		return userLogado.getUsuarioLogado();
 	}
 
 	@RequestMapping(value = { "/", "/login" }, method = GET)
@@ -66,16 +66,16 @@ public class LoginController {
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/admin/home", method = GET)
 	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("userName", getUsuarioLogado().getName() + " (" + getUsuarioLogado().getEmail() + ")");
+		modelAndView.addObject("userName", consultarUsuarioLogado().getName() + " (" + consultarUsuarioLogado().getEmail() + ")");
 		modelAndView.addObject("adminMessage", "Conteúdo disponível para administradores");
 		modelAndView.setViewName("admin/home");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/listarClientes")
 	public Iterable<User> listarClientes() {
 		return userService.findByTipo(CLIENTE);
