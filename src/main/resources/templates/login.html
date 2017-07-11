@@ -15,11 +15,9 @@
 <body>
 	<header id="header-wrapper">
 		<h1 id="header" class="container">
-			<div id="menu">
-				<a href="http://www.meutrabalho.com.br/" title="Ir para a página inicial do Meu Trabalho">
-					<img th:src="@{/images/login.webp}" class="img-responsive center-block" width="350" height="60" alt="Logo Meu Trabalho" />
-				</a>
-			</div>
+			<a href="http://www.meutrabalho.com.br/" title="Ir para a página inicial do Meu Trabalho">
+				<img th:src="@{/images/login.webp}" class="img-responsive center-block" width="500" height="55" alt="Logo Meu Trabalho" />
+			</a>
 		</h1>
 	</header>
 	<section style="background-color: #e9ebee;">
@@ -27,7 +25,7 @@
 		<div class="module form-module">
 			<div class="toggle"></div>
 			<div class="form">
-				<h2 class="titulo">Login</h2>
+			 <h2 class="titulo">Login</h2>
 			  <form th:action="@{/login}" method="POST">
 			  	<input type="text" id="email "name="email" placeholder="Email" />
 			  	<input type="password" id="password" name="password" placeholder="Senha"/>

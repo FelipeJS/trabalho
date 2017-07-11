@@ -7,7 +7,7 @@
 	{
 		margin: 0px;
 		padding: 0px;
-		background: #2056ac;
+		background: #303F9F;
 		font-family: 'Questrial', sans-serif;
 		font-size: 12pt;
 		color: rgba(0,0,0,.6);
@@ -257,7 +257,7 @@
 		display: inline-block;
 		margin-top: 2em;
 		padding: 0.8em 2em;
-		background: #64ABD1;
+		background: #448AFF;
 		line-height: 1.8em;
 		letter-spacing: 1px;
 		text-decoration: none;
@@ -276,6 +276,7 @@
 		border-radius: 20px;
 		text-align: center;
 		color: #272925;
+		border-radius: 10px;
 	}
 	
 	.button-small
@@ -310,7 +311,7 @@
 	#header-wrapper
 	{
 		overflow: hidden;
-		background: #2056ac;
+		background: #303F9F;
 	}
 
 	#header
