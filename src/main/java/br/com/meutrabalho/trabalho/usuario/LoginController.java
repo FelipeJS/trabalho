@@ -52,7 +52,13 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
-			bindingResult.rejectValue("email", "error.user", "Já existe usuário cadastrado com o email informado");
+			if(userExists.getDocumento().equals(user.getDocumento())){
+				userExists.setPassword(user.getPassword());
+				userService.saveUser(userExists);
+				bindingResult.rejectValue("email", "error.user", "Senha atualizada com sucesso!");
+			}else{
+				bindingResult.rejectValue("email", "error.user", "Já existe usuário cadastrado com esse email");
+			}
 		}
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registration");

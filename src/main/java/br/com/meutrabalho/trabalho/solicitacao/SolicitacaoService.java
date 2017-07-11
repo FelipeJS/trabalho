@@ -142,6 +142,26 @@ public class SolicitacaoService {
 	}
 
 	public Long contarSolicitacao(Long userId, int status) {
-		return solicitacaoRepository.countByUserIdAndStatus(userId, status);
+		List<TrabalhaPara> empresasFuncionarios = (ArrayList<TrabalhaPara>) trabalhaParaRepository
+				.findByUserFuncionario(userLogado.getUsuarioLogado());
+
+		if (empresasFuncionarios.size() > 0) {
+			Long qntSolicitacoesParaFuncionario = 0L;
+			
+			for (TrabalhaPara trabalhaPara : empresasFuncionarios) {
+				Iterable<Servico> servicosDaEmpresa = servicoRepository.findByUser(trabalhaPara.getUserEmpresa());
+				Iterable<Solicitacao> solicitacoesDaEmpresa = solicitacaoRepository
+						.findByServicoInOrderByCdSolicitacaoDesc(servicosDaEmpresa);
+
+				for (Solicitacao solicitacao : solicitacoesDaEmpresa) {
+					if (solicitacao.getStatus() == status)
+						qntSolicitacoesParaFuncionario++;
+				}
+			}
+
+			return qntSolicitacoesParaFuncionario;
+		} else {
+			return solicitacaoRepository.countByUserIdAndStatus(userId, status);
+		}
 	}
 }

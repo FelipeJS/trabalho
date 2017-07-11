@@ -71,7 +71,7 @@ public class User implements Serializable {
 
 	private int tipo;
 
-	@NotEmpty(message = "*Preencha a categoria")
+	@NotEmpty(message = "*Preencha a empresa")
 	private String categoria;
 	
 	@NotEmpty(message = "*Preencha o setor")

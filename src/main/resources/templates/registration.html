@@ -4,7 +4,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Cadastro</title>
 	<link rel='shortcut icon' th:href="@{/images/login.webp}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/template.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/fonts.css}" />
 	<script th:src="@{/jquery/jquery.min.js}"></script>
 	<script th:src="@{/jquery/jquery.maskedinput.min.js}"></script>
 	<script>
@@ -19,15 +21,16 @@
 	</script>
 </head>
 <body>
-	<header>
-		<form th:action="@{/}" method="get">
+	<section style="background-color: #e9ebee;">
+		<!-- Form Module-->
+		<div class="module form-module">
+			<div class="toggle"></div>
+			<div class="form">
+			<form th:action="@{/}" method="get">
 			<button class="button" type="Submit">Fazer Login</button>
 		</form>
-	</header>
-	
-	<section>	
 		<form autocomplete="off" action="#" th:action="@{/registration}"
-			th:object="${user}" method="post" class="form-cadastro" role="form">
+			th:object="${user}" method="post"  role="form">
 			
 			<h2 class="titulo">Cadastro</h2>
 			
@@ -77,15 +80,24 @@
 	
 			<button type="submit" class="button" id="cadastrar">Cadastrar</button>
 		</form>
+		</div>
+		</div>
 	</section>
-	<footer id="rodape">
-		<ul>
+	<footer id="copyright">
+		<label class="title">Sobre o Sistema MeuTrabalho</label>
+		<p>O sistema MeuTrabalho foi desenvolvido para atender solicitações de clientes de forma ágil e prática. 
+		As solicitações são realizadas através do site ou em qualquer celular com sistema operacional Android ou IOS. 
+		O MeuTrabalho conta com um leque de empresas oferecendo diversos tipos de serviços para total satisfação dos clientes.</p>
+      	<p>Para se cadastrar as empresas devem entrar em contato através do nosso email <b>tecnologiagrave@gmail.com</b>, sendo necessárias informações básicas das mesmas.
+      Todas as pessoas fisícas podem realizar seu cadastro de forma gratuita através do botão <b>Cadastrar</b> com as informações necessárias para tal.
+       O sistema promove a interação entre ambas as partes, com foco no atendimento das solicitações dos clientes.</p>
+		<ul class="contact">
 			<li><a href="http://www.meutrabalho.com.br/registration">Cadastre-se</a></li>
 			<li><a href="http://www.meutrabalho.com.br/www/index.html">Entrar</a></li>
 			<li><a href="http://www.meutrabalho.com.br">WorkMe</a></li>
 			<li><a href="http://www.facebook.com">Facebook</a></li>
 			<li><a href="https://www.instagram.com/?hl=pt-br">Instagram</a></li>
-			<li><a href="https://www.getninjas.com.br">Sites em Comum</a></li>
+			<li><a href="https://www.getninjas.com.br">GetNinjas</a></li>
 			<li><a href="http://www.meutrabalho.com.br">Sobre</a></li>
 			<li><a href="https://www.facebook.com/careers/?ref=pf">Carreiras</a></li>
 			<li><a href="http://www.meutrabalho.com.br">Termos</a></li>
