@@ -63,8 +63,8 @@ public class LoginController {
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registration");
 		} else {
-			user.setCategoria(user.getCategoria().toUpperCase());
-			user.setSetor(user.getSetor().toUpperCase());
+			user.setEmpresa(user.getEmpresa().toUpperCase());
+			user.setDepartamento(user.getDepartamento().toUpperCase());
 			userService.saveUser(user);
 			modelAndView.addObject("successMessage", "Usuário cadastrado com sucesso");
 			modelAndView.addObject("user", new User());

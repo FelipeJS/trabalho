@@ -28,10 +28,10 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id")
+	@Column(name = "USER_ID")
 	private long id;
 
-	@Column(name = "email", unique = true)
+	@Column(name = "EMAIL", unique = true)
 	@Email(message = "*Utilize um email válido")
 	@NotEmpty(message = "*Preencha o email")
 	private String email;
@@ -51,7 +51,7 @@ public class User implements Serializable {
 	private Set<Role> roles;
 
 	@NotEmpty(message = "*Preencha o CPF")
-	@Column(name = "documento", unique = true)
+	@Column(name = "DOCUMENTO", unique = true)
 	private String documento;
 
 	@NotEmpty(message = "*Preencha o telefone")
@@ -71,11 +71,9 @@ public class User implements Serializable {
 
 	private int tipo;
 
-	@NotEmpty(message = "*Preencha a empresa")
-	private String categoria;
+	private String empresa;
 	
-	@NotEmpty(message = "*Preencha o setor")
-	private String setor;
+	private String departamento;
 
 	public long getId() {
 		return id;
@@ -181,19 +179,19 @@ public class User implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public String getCategoria() {
-		return categoria;
+	public String getEmpresa() {
+		return empresa;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}
 
-	public String getSetor() {
-		return setor;
+	public String getDepartamento() {
+		return departamento;
 	}
 
-	public void setSetor(String setor) {
-		this.setor = setor;
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
 	}
 }

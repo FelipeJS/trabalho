@@ -7,7 +7,7 @@
 	{
 		margin: 0px;
 		padding: 0px;
-		background: #303F9F;
+		background: #3b5998;
 		font-family: 'Questrial', sans-serif;
 		font-size: 12pt;
 		color: rgba(0,0,0,.6);
@@ -311,7 +311,7 @@
 	#header-wrapper
 	{
 		overflow: hidden;
-		background: #303F9F;
+		background: #3b5998;
 	}
 
 	#header

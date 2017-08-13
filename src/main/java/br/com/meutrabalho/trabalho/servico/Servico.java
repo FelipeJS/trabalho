@@ -21,7 +21,7 @@ public class Servico implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "cd_servico")
+	@Column(name = "CD_SERVICO")
 	private Long cdServico;
 
 	@JsonIgnore
@@ -36,30 +36,6 @@ public class Servico implements Serializable {
 	private String descricao;
 
 	private int active;
-
-	public Long getCdServico() {
-		return cdServico;
-	}
-
-	public void setCdServico(Long cdServico) {
-		this.cdServico = cdServico;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 	public String getCategoria() {
 		return categoria;
@@ -83,5 +59,29 @@ public class Servico implements Serializable {
 
 	public void setActive(int active) {
 		this.active = active;
+	}
+
+	public Long getCdServico() {
+		return cdServico;
+	}
+
+	public void setCdServico(Long cdServico) {
+		this.cdServico = cdServico;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 }
